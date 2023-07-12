@@ -46,7 +46,7 @@ jobs:
       - name:  Persist workflow data as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: note-api-artifact
+          name: note-api
           path: staging
   release-api:
     name: note-api-release
