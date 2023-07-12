@@ -1,0 +1,10 @@
+name: Note api release
+
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+jobs:
+  release:

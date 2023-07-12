@@ -41,10 +41,42 @@ jobs:
         with:
           path: ~/.m2
           key:  ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-key: ${{ runner.os }}-m2
+          restore-keys: ${{ runner.os }}-m2
 
       - name:  Persist workflow data as artifact
         uses: actions/upload-artifact@v2
         with:
           name: note-api-artifact
           path: staging
+  release-api:
+    name: note-api-release
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifacts@v3
+        with:
+          name: note-api
+      - name: Test artifact download
+        run: ls -R
+      - name: archive content
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: note-api.zip
+      - name: create a release
+        id: create-new-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+      - name: upload release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: ./note-api.zip
+          asset_name: note-api-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
