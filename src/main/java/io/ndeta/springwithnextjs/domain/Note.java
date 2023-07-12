@@ -24,4 +24,7 @@ public class Note implements Serializable {
     private Level level;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy hh:mm:ss",timezone = "Europe/Tallinn")
     private LocalDateTime createdAt;
+
+    public Note(long l, String s, String s1, Level level, LocalDateTime now) {
+    }
 }
