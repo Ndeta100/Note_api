@@ -28,8 +28,23 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: |
+          mvn -B package --file pom.xml
+          mkdir staging && cp target/*.jar staging
       - name: What is in the target folder
         run: |   
           cd target
           ls -a
+#          Speed up build
+      - name: Set up cache for maven
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key:  ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-key: ${{ runner.os }}-m2
+
+      - name:  Persist workflow data as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: note-api-artifact
+          path: staging
