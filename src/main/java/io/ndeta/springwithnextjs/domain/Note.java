@@ -27,4 +27,8 @@ public class Note implements Serializable {
 
     public Note(long l, String s, String s1, Level level, LocalDateTime now) {
     }
+
+    public Note() {
+
+    }
 }
