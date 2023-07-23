@@ -1,8 +1,16 @@
+
+# Fetching latest version of Java
+FROM openjdk:11-jdk-slim AS build
+# Set working directory
+WORKDIR /app
+
+# Copy the application files
+COPY . .
+
 # Build the application
 RUN ./mvnw package -DskipTests
-# Fetching latest version of Java
-FROM openjdk:17
-
+# Final image
+FROM openjdk:11-jre-slim
 # Setting up work directory
 WORKDIR /app
 
