@@ -5,9 +5,10 @@ server:
     path: = /note/error
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/note
+    #url: jdbc:mysql://localhost:3306/note
+    url: jdbc:mysql://root:xwPxxRngxrT6OfqQ38yt@containers-us-west-166.railway.app:6948/railway
     username: root
-    password: password
+    password: xwPxxRngxrT6OfqQ38yt
   jpa:
     database-platform: org.hibernate.dialect.MySQL8InnoDBDialect
     generate-ddl: true
