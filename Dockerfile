@@ -7,8 +7,6 @@ WORKDIR /app
 # Copy the application files
 COPY . .
 
-# Build the application
-RUN ./mvnw package -DskipTests
 # Final image
 FROM openjdk:11-jre-slim
 # Setting up work directory
