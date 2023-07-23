@@ -1,8 +1,6 @@
-
+ARG JAVA_VERSION=17
 # Fetching latest version of Java
-FROM eclipse-temurin:17-jdk-alpine
-# Set working directory
-WORKDIR /app
+FROM openjdk:${JAVA_VERSION}
 
 # Copy the jar file into our app
 COPY  /target/spring-with-nextjs-0.0.1-SNAPSHOT.jar note-api.jar
@@ -11,4 +9,5 @@ COPY  /target/spring-with-nextjs-0.0.1-SNAPSHOT.jar note-api.jar
 EXPOSE 8080
 
 # Starting the application
-CMD ["java", "-jar", "note-api.jar"]
+CMD ["java", "-jar", "/note-api.jar"]
+
