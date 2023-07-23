@@ -1,13 +1,15 @@
-ARG JAVA_VERSION=17
+
 # Fetching latest version of Java
-FROM openjdk:${JAVA_VERSION}
-
-# Copy the jar file into our app
-COPY  /build/spring-with-nextjs-0.0.1-SNAPSHOT.jar note-api.jar
-
+FROM eclipse-temurin:17-jdk-focal
+WORKDIR /app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
+# Copy app
+COPY src ./src
 # Exposing port 8080
 EXPOSE 8080
-
 # Starting the application
-CMD ["java", "-jar", "/note-api.jar"]
+CMD ["./mvnw", "spring-boot:run"]
+
 
