@@ -3,7 +3,7 @@ ARG JAVA_VERSION=17
 FROM openjdk:${JAVA_VERSION}
 
 # Copy the jar file into our app
-COPY  /spring-with-nextjs-0.0.1-SNAPSHOT.jar note-api.jar
+COPY  /build/spring-with-nextjs-0.0.1-SNAPSHOT.jar note-api.jar
 
 # Exposing port 8080
 EXPOSE 8080
