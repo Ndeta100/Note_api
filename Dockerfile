@@ -6,14 +6,15 @@ WORKDIR /app
 
 # Copy the application files
 COPY . .
-
+# Build the application
+RUN ./mvnw package -DskipTests
 # Final image
 FROM openjdk:11-jre-slim
 # Setting up work directory
 WORKDIR /app
 
 # Copy the jar file into our app
-COPY --from=build /target/spring-with-nextjs-0.0.1-SNAPSHOT.jar .
+COPY --from=build /app/target/spring-with-nextjs-0.0.1-SNAPSHOT.jar .
 
 # Exposing port 8080
 EXPOSE 8080
