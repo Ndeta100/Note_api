@@ -15,11 +15,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.Collections;
+
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.OK;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "note")
