@@ -1,0 +1,13 @@
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: note-api-service
+spec:
+  selector:
+    app: note-api
+  ports:
+    - protocol: TCP
+      port: 80 # The port through which your application will be exposed externally
+      targetPort: 8080 # The port your Spring Boot application listens on inside the container
+  type: LoadBalancer # Use LoadBalancer for public access, NodePort or ClusterIP for internal access

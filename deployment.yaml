@@ -1,0 +1,39 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: note-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: note-api
+  template:
+    metadata:
+      labels:
+        app: note-api
+    spec:
+      containers:
+        - name: note-api-container
+          image: docker.io/ndeta100/note-api:18
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: note-api-secrets
+                  key: DB_URL
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: note-api-secrets
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: note-api-secrets
+                  key: DB_PASSWORD
+                  
+# Use command below to access project  out of kubernetes cluster
+#minikube service demo-backend
